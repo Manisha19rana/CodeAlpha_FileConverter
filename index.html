@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=1">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="responsive.css">
+  <title>Home</title>
+</head>
+<body>
+  <h1>File Converter</h1>
+
+  <div class="container">
+    <div class="button">
+      <div class="upload">
+        <input type="file" onChange="loadFile(event)" name="" accept=".png, .jpg, .jpeg">Upload Image
+      </div>
+      <button onClick="pdfDown()">Download as PDF</button>
+    </div>
+  </div>
+
+  <h2>&copy; File Converter 2023 - All Rights Reserved</h2>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.debug.js"></script>
+  <script>
+    var newImage;
+    
+    function loadFile(event) {
+      newImage = new Image();
+      newImage.src = URL.createObjectURL(event.target.files[0]);
+    }
+
+    function pdfDown() {
+      console.log(newImage);
+      var doc = new jsPDF();
+      doc.addImage(newImage, 'JPEG', 10, 10);
+      doc.save('ImgToPDF.pdf');
+    }
+  </script>
+</body>
+</html>
